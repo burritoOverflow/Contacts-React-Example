@@ -28,11 +28,11 @@ class Contacts extends Component {
   render() {
     const { contacts } = this.state;
     return (
-      <div>
+      <>
         {contacts.map(contact => (
           <Contact key={contact.id} contact={contact} />
         ))}
-      </div>
+      </>
     );
   }
 }
