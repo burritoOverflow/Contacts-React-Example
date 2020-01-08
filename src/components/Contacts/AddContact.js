@@ -7,7 +7,8 @@ class AddContact extends Component {
   state = {
     name: "",
     email: "",
-    phone: ""
+    phone: "",
+    errors: {}
   };
 
   handleChange = e =>
@@ -18,6 +19,35 @@ class AddContact extends Component {
   onSubmit = (dispatch, e) => {
     e.preventDefault();
     const { name, email, phone } = this.state;
+
+    // check for errors
+    if (name === "") {
+      this.setState({
+        errors: {
+          name: "Name is required"
+        }
+      });
+      return;
+    }
+
+    if (email === "") {
+      this.setState({
+        errors: {
+          email: "Email is required"
+        }
+      });
+      return;
+    }
+
+    if (phone === "") {
+      this.setState({
+        errors: {
+          phone: "Phone is required"
+        }
+      });
+      return;
+    }
+
     // es6 syntax for instances where the key value are the same
     const newContact = {
       id: uuid(),
@@ -27,15 +57,17 @@ class AddContact extends Component {
     };
     dispatch({ type: "ADD_CONTACT", payload: newContact });
 
+    // clear form fields and errors
     this.setState({
       name: "",
       email: "",
-      phone: ""
+      phone: "",
+      errors: {}
     });
   };
 
   render() {
-    const { name, email, phone } = this.state;
+    const { name, email, phone, errors } = this.state;
 
     return (
       <Consumer>
@@ -52,6 +84,7 @@ class AddContact extends Component {
                     placeholder="Enter name"
                     value={name}
                     onChange={this.handleChange}
+                    error={errors.name}
                   />
                   <TextInputGroup
                     label="Email"
@@ -60,6 +93,7 @@ class AddContact extends Component {
                     placeholder="Enter email"
                     value={email}
                     onChange={this.handleChange}
+                    error={errors.email}
                   />
                   <TextInputGroup
                     label="Phone"
@@ -68,6 +102,7 @@ class AddContact extends Component {
                     placeholder="Enter phone number"
                     value={phone}
                     onChange={this.handleChange}
+                    error={errors.phone}
                   />
                   <input
                     type="submit"
