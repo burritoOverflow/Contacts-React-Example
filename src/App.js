@@ -8,8 +8,10 @@ function App() {
   return (
     <div className="App">
       <Header branding="Contact Manager" />
-      <Contact name="John Doe" email="Jdoe@poop.org" phone="21231-3131" />
-      <Contact name="Peter Doe" email="Jdoe@poop.org" phone="21231-3131" />
+      <div className="container">
+        <Contact name="John Doe" email="Jdoe@poop.org" phone="21231-3131" />
+        <Contact name="Peter Doe" email="Jdoe@poop.org" phone="21231-3131" />
+      </div>
     </div>
   );
 }
