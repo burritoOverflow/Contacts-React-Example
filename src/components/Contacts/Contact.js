@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 import { Consumer } from "../../Context";
 
 class Contact extends Component {
@@ -18,8 +19,21 @@ class Contact extends Component {
     });
   };
 
-  handleDeleteClick = (id, dispatch) => {
-    dispatch({ type: "DELETE_CONTACT", payload: id });
+  // this doesnt *actually* perform a delete operation, as we're just
+  // doing a mock up here
+  handleDeleteClick = async (id, dispatch) => {
+    // use for the mock api
+    const response = await axios.delete(
+      `https://jsonplaceholder.typicode.com/users/${id}`
+    );
+    // mock api returns a 200 on 'success'
+    if (response.status === 200) {
+      // dispatch to context, responsible for DOM deletion
+      dispatch({
+        type: "DELETE_CONTACT",
+        payload: id
+      });
+    }
   };
 
   render() {
