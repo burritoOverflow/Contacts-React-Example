@@ -20,7 +20,7 @@ class AddContact extends Component {
     e.preventDefault();
     const { name, email, phone } = this.state;
 
-    // check for errors
+    // check for empty inputs
     if (name === "") {
       this.setState({
         errors: {
@@ -64,6 +64,8 @@ class AddContact extends Component {
       phone: "",
       errors: {}
     });
+
+    this.props.history.push("/");
   };
 
   render() {
