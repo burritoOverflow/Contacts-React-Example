@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Provider } from "./Context";
@@ -7,6 +7,7 @@ import Header from "./components/layout/Header";
 
 import Contacts from "./components/Contacts/Contacts";
 import AddContact from "./components/Contacts/AddContact";
+import EditContact from "./components/Contacts/EditContact";
 import About from "./components/pages/About";
 import NotFound from "./components/pages/NotFound";
 
@@ -20,6 +21,11 @@ function App() {
             <Switch>
               <Route exact path="/" component={Contacts}></Route>
               <Route exact path="/contact/add" component={AddContact}></Route>
+              <Route
+                exact
+                path="/contact/edit/:id"
+                component={EditContact}
+              ></Route>
               <Route exact path="/about" component={About}></Route>
               <Route component={NotFound}></Route>
             </Switch>
